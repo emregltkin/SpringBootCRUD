@@ -31,6 +31,15 @@ public class CustomerController {
 	@Autowired
 	private BranchService branchService;
 
+	/**
+	 * DataUtil class'ındaki verileri toplu olarak kaydeder.
+	 */
+	@PostMapping("/saveAllDatas")
+	public ResponseEntity<Void> saveAll() {
+		customerService.saveAllCustomer(DataUtil.getCustomersAndBranches());
+		return new ResponseEntity<Void>(HttpStatus.OK);
+	}
+
 	@GetMapping("/listAll")
 	public ResponseEntity<List<Customer>> getAllCustomers() {
 		List<Customer> list = customerService.findAll();
@@ -120,14 +129,5 @@ public class CustomerController {
 			customerService.saveCustomer(customer);
 		}
 		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-	}
-
-	/**
-	 * DataUtil class'ındaki verileri toplu olarak kaydeder.
-	 */
-	@GetMapping("/saveAllCustomers")
-	public ResponseEntity<Void> saveAll() {
-		customerService.saveAllCustomer(DataUtil.getCustomersAndBranches());
-		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 }
