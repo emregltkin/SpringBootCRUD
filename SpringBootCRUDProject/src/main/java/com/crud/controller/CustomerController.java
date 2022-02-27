@@ -108,12 +108,12 @@ public class CustomerController {
 	}
 
 	/**
-	 * Belirli bir id'ye sahip customer'dan mevcut branch'i silme işini yapar.
+	 * Belirli bir id'ye sahip customer ile mevcut branch arasındaki ilişkiyi kaldırır.
 	 * @throws Exception
 	 *
 	 */
 	@PostMapping("/{id}/removeBranch/{branchId}")
-	public ResponseEntity<Void> deleteBranchByCustomerId(@PathVariable("id") Long customerId, @PathVariable("branchId") Long branchId) throws Exception  {
+	public ResponseEntity<Void> removeBranchByCustomerId(@PathVariable("id") Long customerId, @PathVariable("branchId") Long branchId) throws Exception  {
 		Customer customer = customerService.getCustomerById(customerId);
 		if (customer != null) {
 			List<Branch> branches = branchService.getBranchesByCustomerId(customerId);
